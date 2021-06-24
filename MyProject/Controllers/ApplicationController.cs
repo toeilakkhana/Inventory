@@ -179,6 +179,12 @@ namespace MyProject.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult GetDataSupport()
+        {
+            var empData = _uow.ApplicationRepository.GetAll();
+            return Json(empData);
+        }
     }
 }
 
