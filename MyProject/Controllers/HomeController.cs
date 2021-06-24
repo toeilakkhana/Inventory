@@ -21,7 +21,7 @@ namespace MyProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetType()
+        public JsonResult GetTypep()
         {
             var empData = _uow.ConfigRepository.GetAll().Where(w => w.Conf_System == "Project" && w.Conf_Type == "Type");
             return Json(empData);
@@ -73,14 +73,21 @@ namespace MyProject.Controllers
                 var rs = new CollectProject()
                 {
 
+                    JobCode = obj.JobCode,
                     ProjectName = obj.ProjectName,
                     BusinessAnalyst = obj.BusinessAnalyst,
-                    JobCode = obj.JobCode,
-                    JobCodeName = obj.JobCodeName,
+                    JobName = obj.JobName,
+                    Revenue = obj.Revenue,
                     NumSR = obj.NumSR,
                     NumPOT = obj.NumPOT,
-                    Revenue = obj.Revenue,
-                    BusinessUnit = obj.BusinessUnit
+                    BusinessUnit = obj.BusinessUnit,
+                    ProjectManager = obj.ProjectManager,
+                    ProjectStatus = obj.ProjectStatus,
+                    Type = obj.Type,
+                    PlanStartDate = obj.PlanStartDate.AddDays(1),
+                    PlanEndDate = obj.PlanEndDate.AddDays(1),
+                    ActualStartDate = obj.ActualStartDate.AddDays(1),
+                    ActualEndDate = obj.ActualEndDate.AddDays(1)
 
                 };
                 _uow.CollectProjectRepository.Insert(rs);

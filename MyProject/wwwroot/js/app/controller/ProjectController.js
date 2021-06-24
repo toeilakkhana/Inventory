@@ -6,10 +6,10 @@ myapp.controller('ProjectController', function ($scope, $http) {
         $scope.GetType();
         $scope.GetStatus();
         $scope.GetProjectMng();
-    };         
+    };
 
-    $scope.GetType = function () {
-        $http.post(window.baseUrl + 'Home/GetType', {})
+    $scope.GetTypep = function () {
+        $http.post(window.baseUrl + 'Home/GetTypep', {})
             .then(function (res) {
                 console.log(res.data);
                 $scope.type = res.data;
@@ -84,14 +84,21 @@ myapp.controller('ProjectController', function ($scope, $http) {
 
     $scope.SaveProject = function (pj) {
         var pj = {
+            JobCode: $scope.pj.jobCode,
             ProjectName: $scope.pj.projectName,
             BusinessAnalyst: $scope.pj.businessAnalyst,
-            JobCode: $scope.pj.jobCode,
-            JobCodeName: $scope.pj.jobCodeName,
+            JobName: $scope.pj.jobName,
             NumSR: $scope.pj.numSR,
             NumPOT: $scope.pj.numPOT,
             Revenue: $scope.pj.revenue,
-            BusinessUnit: $scope.pj.businessUnit
+            BusinessUnit: $scope.pj.businessUnit,
+            ProjectManager: $scope.pj.projectManager,
+            ProjectStatus: $scope.pj.projectStatus,
+            Type: $scope.pj.type,
+            PlanStartDate: $scope.pj.planStartDate,
+            PlanEndDate: $scope.pj.planEndDate,
+            ActualStartDate: $scope.pj.actualStartDate,
+            ActualEndDate: $scope.pj.actualEndDate,
         }
         console.log(pj)
         $http.post(window.baseUrl + 'Home/SaveProject', JSON.stringify(pj))
@@ -107,25 +114,32 @@ myapp.controller('ProjectController', function ($scope, $http) {
                         title: 'Can Not Save'
                     })
                 }
-                $scope.GetProject();
+
+                $scope.pj.jobCode = null;
                 $scope.pj.projectName = null;
                 $scope.pj.businessAnalyst = null;
-                $scope.pj.jobCode = null;
-                $scope.pj.jobCodeName = null;
+                $scope.pj.jobName = null;
+                $scope.pj.revenue = null;
                 $scope.pj.numSR = null;
                 $scope.pj.numPOT = null;
-                $scope.pj.revenue = null;
                 $scope.pj.businessUnit = null;
-                $('#modalAdd').modal('hide');
-               
+                $scope.pj.projectManager = null;
+                $scope.pj.projectStatus = null;
+                $scope.pj.type = null;
+                $scope.pj.planStartDate = null;
+                $scope.pj.planEndDate = null;
+                $scope.pj.actualStartDate = null;
+                $scope.pj.actualEndDate = null;
+
             });
     }
-  
+
+    $scope.ResetForm = function (sp) {
+        //Even when you use form = {} it does not work
+        angular.copy({}, sp);
+    }
+    $scope.ShowModalAdd = function () {
+        $('#modalAdd').modal('show');
+    }
 
 });
-
-    
-
-    
-
-  

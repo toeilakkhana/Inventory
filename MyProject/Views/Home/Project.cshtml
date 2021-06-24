@@ -1,198 +1,285 @@
 ﻿<br />
 
-<div ng-controller="ProjectController" ng-init="Init();">
-    <div class="card card-white">
+<div ng-controller="ProjectController" ng-init="Init();" class="ng-scope">
+    <div class="card card-blue">
         <div class="card-header">
-            <div class="text-center">
-                <p>Project Detail</p>
-            </div>
-            <div class="card-body">
-                <div class="form-row">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <h3>Project Detail</h3>
+                </div>
 
-                    <div class="form-group col-md-5">
-                        <label for="projectname">Project Name</label>
-                        <input type="text" class="form-control" ng-model="pj.projectName" placeholder="Project Name">
-                    </div>
-                    <div class="form-group col-md-1/2">
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="projectname">Business Analyst</label>
-                        <input type="text" class="form-control" ng-model="pj.ba" placeholder="BA">
-                    </div>
-
-
-                    <div class="form-group col-md-4">
-                        <label for="jobcode">Job code</label>
-                        <input type="text" class="form-control" ng-model="pj.jobCode" placeholder="Job code">
-                    </div>
-                    <div class="form-group col-md-1/2">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="jobcodename">Job code name</label>
-                        <input type="text" class="form-control" ng-model="pj.jobCodeName" placeholder="Job code name">
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="numSR">number SR</label>
-                        <input type="text" class="form-control" ng-model="pj.numSR" placeholder="Number SR">
-                    </div>
-                    <div class="form-group col-md-1/2">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="numPOT">number POT</label>
-                        <input type="text" class="form-control" ng-model="pj.numPOT" placeholder="Number POT">
-                    </div>
-                    <div class="form-group col-md-3">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label>Plan start date<a class="text-danger">*</a></label>
-                        <input type="date" ng-model="emp.planstartDate" class="form-control" required />
-                    </div>
-                    <div class="form-group col-md-1/2">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Plan end date<a class="text-danger">*</a></label>
-                        <input type="date" ng-model="emp.planendDate" class="form-control" required />
-                    </div>
-                    <div class="form-group col-md-5">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label>actual start date<a class="text-danger">*</a></label>
-                        <input type="date" ng-model="emp.actualstartDate" class="form-control" required />
-                    </div>
-                    <div class="form-group col-md-1/2">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Actual end date<a class="text-danger">*</a></label>
-                        <input type="date" ng-model="emp.actualendDate" class="form-control" required />
-                    </div>
-                    <div class="form-group col-md-5">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label for="Type">Type</label>
-                        <select class="form-control" id="exampleFormControlSelect2" ng-model="typeP" required>
-                            <option ng-repeat="item in type" ng-value="item.confDescription">{{item.confDescription}}</option>
-                        </select>
-                        <label for="Type">Test</label>
-                        <input type="text" ng-model="typeP" class="form-control" required />
-
-                    </div>
-                    <div class="form-group col-md-9">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Revenue">Revenue</label>
-                        <input type="text" class="form-control" ng-model="pj.revenue" placeholder="Revenue">
-                    </div>
-                    <div class="form-group col-md-6">
-                    </div>
-                    <div class="form-group">
-                        <label for="AttachFile">Attach file</label>
-                        <input type="file" id="Attachfile">
-                        <p class="help-block">Past file here.</p>
-                    </div>
+                <div class="col-md-2 text-right">
+                    <a class="btn btn-success btn-md text-white" ng-click="ShowModalAdd();"><i class="fas fa-plus-circle text-white"></i>&nbsp;Add Project</a>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="search" placeholder="Search">
+                </div>
+                <div class="col-md-2 text-left">
+                    <button id="exportButton" class="btn btn-md btn-danger clearfix"><span class="fa fa-file-excel-o"></span> Export to Excel</button>
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="card card-white">
-        <div class="card-header">
-            <div class="text-center">
-                <p>Customer Detail</p>
-            </div>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label for="ProjectManager">Project Manager</label>
-                        <select class="form-control" id="exampleFormControlSelect4" ng-model="pj.projectM" required>
-                            <option ng-repeat="item in projectmanager" ng-value="item.confDescription">{{item.confDescription}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-5">
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="KeyUsers">Key Users</label>
-                        <input type="text" class="form-control" ng-model="keyUser.customerId" ng-enter="GetKeyUser(keyUser.customerId)" placeholder="KeyUser">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="KeyUsers">Key Users Name</label>
-                        <input type="text" class="form-control" ng-model="keyUser.customerName" placeholder="Name">
-                    </div>
-                    <div class="form-group col-md-3">
-                    </div>
-
-                </div>
-                <div class="form-row">
-
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label for="BusinessTeam">Business Team1</label>
-                        <input type="text" class="form-control" ng-model="businessT.customerId" ng-enter="GetBusinessT(businessT.customerId)" placeholder="Business Team">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="BusinessTeam">Business Team1 Name</label>
-                        <input type="text" class="form-control" ng-model="businessT.customerName" placeholder="Business Team">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label for="BusinessTeam">Business Team2</label>
-                        <input type="text" class="form-control" ng-model="businessTe.customerId" ng-enter="GetBusinessTe(businessTe.customerId)" placeholder="Business Team">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="BusinessTeam">Business Team2 Name</label>
-                        <input type="text" class="form-control" ng-model="businessTe.customerName" placeholder="Business Team">
-                    </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="BU">Business Unit</label>
-                    <input type="text" class="form-control" ng-model="pj.bu" placeholder="Business Unit">
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="card card-white">
-        <div class="card-header">
-            <div class="text-center">
-                <p>PTT Digital Detail</p>
-            </div>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-
-                        <label for="Status">Project status</label>
-
-                        <select class="form-control" id="exampleFormControlSelect3" ng-model="statusP" required>
-                            <option ng-repeat="item in status" ng-value="item.confDescription">{{item.confDescription}}</option>
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-
+        <div class="card-body">
+            <table class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                        <th>AppID</th>
+                        <th>ApplicationName</th>
+                        <th>AppOwnerName</th>
+                        <th>OCIOName</th>
+                        <th>ProjectManager</th>
+                        <th>Primary Support</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in GetSupport | filter : search">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.en}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.age}}</td>
+                        <td>{{item.departmentId}}</td>
+                        <td>{{item.startDate | date : 'dd/MM/yyyy'}}</td>
+                        <td>
+                            <a class="btn btn-warning btn-sm text-white" ng-click="ShowModalEdit(item.en);"><i class="fas fa-pen"></i></a>
+                            <a class="btn btn-danger btn-sm text-white" ng-click="Delete(item.en);"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-left" style="background-color:deepskyblue">
+                    <h4 class="modal-title w-100 font-weight-bold text-white">Add Project Detail</h4>
+                </div>
+                <form class="ng-valid-maxlength ng-dirty ng-valid-parse ng-valid ng-valid-required ng-submitted">
+                    <div class="modal-body mx-3 text-left">
+                        <div class="card-body">
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="projectname">Project Name</label>
+                                    <input type="text" class="form-control" ng-model="pj.projectName" placeholder="Project Name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="businesanalyst">Business Analyst</label>
+                                    <input type="text" class="form-control" ng-model="pj.businessAnalyst" placeholder="BA">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="jobcode">Job code</label>
+                                    <input type="text" class="form-control" ng-model="pj.jobCode" placeholder="Job code">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="jobcodename">Job code name</label>
+                                    <input type="text" class="form-control" ng-model="pj.jobName" placeholder="Job code name">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="numSR">number SR</label>
+                                    <input type="text" class="form-control" ng-model="pj.numSR" placeholder="Number SR">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="numPOT">number POT</label>
+                                    <input type="text" class="form-control" ng-model="pj.numPOT" placeholder="Number POT">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Plan start date<a class="text-danger">*</a></label>
+                                    <input type="date" ng-model="pj.planStartDate" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Plan end date<a class="text-danger">*</a></label>
+                                    <input type="date" ng-model="pj.planEndDate" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>actual start date<a class="text-danger">*</a></label>
+                                    <input type="date" ng-model="pj.actualStartDate" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Actual end date<a class="text-danger">*</a></label>
+                                    <input type="date" ng-model="pj.actualendDate" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Type">Type</label>
+                                    <select class="form-control" id="exampleFormControlSelect2" ng-model="pj.type" required>
+                                        <option ng-repeat="item in type" ng-value="item.confDescription">{{item.confDescription}}</option>
+                                    </select>
+                                    <label for="Type">Test</label>
+                                    <input type="text" ng-model="pj.type" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Revenue">Revenue</label>
+                                    <input type="text" class="form-control" ng-model="pj.revenue" placeholder="Revenue">
+                                </div>
+                                <div class="form-group col-md-5">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="AttachFile">Attach file</label>
+                                    <input type="file" id="Attachfile">
+                                    <p class="help-block">Past file here.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="ProjectManager">Project Manager</label>
+                                    <select class="form-control" id="exampleFormControlSelect4" ng-model="pj.projectManager" required>
+                                        <option ng-repeat="item in projectmanager" ng-value="item.confDescription">{{item.confDescription}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="KeyUsers">Key Users</label>
+                                    <input type="text" class="form-control" ng-model="keyUser.customerId" ng-enter="GetKeyUser(keyUser.customerId)" placeholder="KeyUser">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="KeyUsers">Key Users Name</label>
+                                    <input type="text" class="form-control" ng-model="keyUser.customerName" placeholder="Name">
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="BusinessTeam">Business Team1</label>
+                                    <input type="text" class="form-control" ng-model="businessT.customerId" ng-enter="GetBusinessT(businessT.customerId)" placeholder="Business Team">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="BusinessTeam">Business Team1 Name</label>
+                                    <input type="text" class="form-control" ng-model="businessT.customerName" placeholder="Business Team">
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="BusinessTeam">Business Team2</label>
+                                    <input type="text" class="form-control" ng-model="businessTe.customerId" ng-enter="GetBusinessTe(businessTe.customerId)" placeholder="Business Team">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="BusinessTeam">Business Team2 Name</label>
+                                    <input type="text" class="form-control" ng-model="businessTe.customerName" placeholder="Business Team">
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="BU">Business Unit</label>
+                                    <input type="text" class="form-control" ng-model="pj.businessUnit" placeholder="Business Unit">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="Status">Project status</label>
+
+                                        <select class="form-control" id="exampleFormControlSelect3" ng-model="pj.projectStatus" required>
+                                            <option ng-repeat="item in status" ng-value="item.confDescription">{{item.confDescription}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="button" class="btn btn-primary btn-success" ng-click="SaveProject(pj)">Save </button>
+                            <button type="button" class="btn btn-primary btn-dark" ng-click="ResetForm();" data-dismiss="modal">Close</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-left" style="background-color:deepskyblue">
+                    <h4 class="modal-title w-100 font-weight-bold text-white">Edit Project</h4>
+                </div>
+                <form class="ng-pristine ng-valid-maxlength ng-invalid ng-invalid-required">
+                    <div class="modal-body mx-5 text-left">
+                        <div class="form-group">
+                            <label>En.<a class="text-danger">*</a></label>
+                            <input type="text" maxlength="10" ng-model="dataPerEmp.en" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" readonly="">
+                        </div>
+                        <div class="form-group">
+                            <label>Name<a class="text-danger">*</a></label>
+                            <input type="text" maxlength="50" ng-model="dataPerEmp.name" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Age<a class="text-danger">*</a></label>
+                            <input type="number" ng-model="dataPerEmp.age" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>DepartmentId<a class="text-danger">*</a></label>
+                            <input type="text" maxlength="3" ng-model="dataPerEmp.departmentId" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label>StartDate<a class="text-danger">*</a></label>
+                            <input type="text" ng-model="dataPerEmp.startDate" class="form-control ng-pristine ng-untouched ng-valid ng-empty" readonly="">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-end">
+                        <button type="submit" class="btn btn-sm btn-success" ng-click="Update(dataPerEmp);">Save </button>
+                        <button class="btn btn-sm btn-dark" ng-click="ResetForm();" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
-<div class="card-header">
-    <div class="text-center">
-        <button type="button" class="btn btn-primary btn-lg" ng-click="SaveProject(pj)">Save</button>
-        <button type="button" class="btn btn-danger btn-lg" ng-click="ResetForm()">Cancel</button>
-    </div>
-</div>
+
 
 @section Scripts{
     <script src="~/js/app/Controller/ProjectController.js"></script>
 }
-
