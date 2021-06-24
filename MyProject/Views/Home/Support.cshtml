@@ -34,16 +34,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in GetSupport | filter : search">
-                        <td>{{$index+1}}</td>
-                        <td>{{item.en}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.age}}</td>
-                        <td>{{item.departmentId}}</td>
-                        <td>{{item.startDate | date : 'dd/MM/yyyy'}}</td>
+                    <tr ng-repeat="item in dataSup | filter : search">           
+                        <td>{{item.app_id}}</td>
+                        <td>{{item.app_name}}</td>
+                        <td>{{item.app_obj}}</td>
+                        <td>{{item.app_url}}</td>
+                        <td>{{item.company}}</td>
+                        <td>{{item.doc_path}}</td>
                         <td>
-                            <a class="btn btn-warning btn-sm text-white" ng-click="ShowModalEdit(item.en);"><i class="fas fa-pen"></i></a>
-                            <a class="btn btn-danger btn-sm text-white" ng-click="Delete(item.en);"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-warning btn-sm text-white" ><i class="fas fa-pen"></i></a>
+                            <a class="btn btn-danger btn-sm text-white" ><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>

@@ -12,6 +12,7 @@ myapp.controller('SupportController', function ($scope, $http) {
         $scope.GetAppStatus();
         $scope.GetSoftwareVer();
         $scope.GetDepartment();
+        $scope.GetDataSupport();
         console.log('Work');
     };
 
@@ -208,5 +209,13 @@ myapp.controller('SupportController', function ($scope, $http) {
     }
     $scope.ShowModalAdd = function () {
         $('#modalAdd').modal('show');
+    }
+
+    $scope.GetDataSupport = function () {
+        $http.post(window.baseUrl + 'Application/GetDataSupport', {})
+            .then(function (res) {
+                console.log(res.data);
+                $scope.dataSup = res.data;
+            });
     }
 });

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FgiFUi2HTmPexlqpe0WxcFjwUeSH/97WxJ6mq1A2J3Kd8kGZNbDpdhEBPH7g4+PASu2/GZpZ04npXkYtzFhoJQ==",
+  "dgSpecHash": "s0Xjqm2qXM6YGUpDf4t2umxEROw4RHtss7PA/fZ5XewG4BbGP9+x2BTu1YPgDrg4OizHBz4+/ArYEbDcV+DfwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TEMP\\Desktop\\MyProject\\MyProject\\MyProject.csproj",
+  "projectFilePath": "C:\\Users\\TEMP\\Desktop\\Inventory\\MyProject\\MyProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TEMP\\.nuget\\packages\\bootstrap\\5.0.1\\bootstrap.5.0.1.nupkg.sha512",
     "C:\\Users\\TEMP\\.nuget\\packages\\bootstrap.less\\3.3.6\\bootstrap.less.3.3.6.nupkg.sha512",
