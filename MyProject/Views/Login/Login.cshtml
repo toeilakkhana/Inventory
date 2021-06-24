@@ -1,0 +1,70 @@
+﻿
+<br />
+<br />
+<br />
+
+<div class="login-box container">
+
+    <div ng-controller="LoginController" ng-init="Init();" class="ng-scope">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Login</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <a href="#" class="brand-link">
+                    <div class="mb-8">
+                        <img src="~/Themes/AdminLte/dist/img/pttlogo.jpg" alt="Ptt Logo" class="brand-image img-circle elevation-8"
+                             style="opacity: .8" >
+                    </div>
+
+                </a>
+
+                <form action="~/Home/Support" method="post">
+
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" ng-model="lge.user_Email" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" ng-model="lge.user_Pass" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" ng-click="GetUser(lge)" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </form>
+
+                <!-- /.social-auth-links -->
+
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="~/js/app/controller/LoginController.js"></script>
+
+}
