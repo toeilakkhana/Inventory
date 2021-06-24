@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MyProject",
+    "\\MyProject\\wwwroot",
+    "\\MyProject\\wwwroot\\js",
+    "\\MyProject\\wwwroot\\js\\app",
+    "\\MyProject\\wwwroot\\js\\app\\controller"
+  ],
+  "SelectedNode": "\\MyProject\\wwwroot\\js\\app\\controller\\SupportController.js",
+  "PreviewInSolutionExplorer": false
+}
