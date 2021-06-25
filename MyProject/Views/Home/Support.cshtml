@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <h3>Application Detail</h3>
                 </div>
-                   
+
                 <div class="col-md-2 text-right">
                     <a class="btn btn-success btn-md text-white" ng-click="ShowModalAdd();"><i class="fas fa-plus-circle text-white"></i>&nbsp;Add Application</a>
                 </div>
@@ -16,10 +16,10 @@
                 </div>
                 <div class="col-md-2 text-left">
                     <button id="exportButton" class="btn btn-md btn-danger clearfix"><span class="fa fa-file-excel-o"></span> Export to Excel</button>
-                </div> 
+                </div>
             </div>
         </div>
-        
+
         <div class="card-body">
             <table class="table table-striped table-bordered ">
                 <thead>
@@ -34,16 +34,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in dataSup | filter : search">           
-                        <td>{{item.app_id}}</td>
-                        <td>{{item.app_name}}</td>
-                        <td>{{item.app_obj}}</td>
-                        <td>{{item.app_url}}</td>
+                    <tr ng-repeat="item in dataSup | filter : search">
+                        <td>{{item.appId}}</td>
+                        <td>{{item.appName}}</td>
+                        <td>{{item.appObj}}</td>
+                        <td>{{item.appUrl}}</td>
                         <td>{{item.company}}</td>
-                        <td>{{item.doc_path}}</td>
+                        <td>{{item.docPath}}</td>
                         <td>
-                            <a class="btn btn-warning btn-sm text-white" ><i class="fas fa-pen"></i></a>
-                            <a class="btn btn-danger btn-sm text-white" ><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-warning btn-sm text-white"><i class="fas fa-pen" ng-click="ShowModalEdit(item.appId)"></i></a>
+                            <a class="btn btn-danger btn-sm text-white"><i class="fas fa-trash" ng-click="DeleteDataSupport(item.appId);"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -179,7 +179,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row mb-3">
                                 <div class="form-group col-md-2">
                                     <label for="software">Software Version</label>
@@ -215,7 +215,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
 
                             <div class="form-row mb-2">
                                 <div class="form-group col-md-6">
@@ -257,7 +257,7 @@
                     </div>
                     <div class="modal-footer justify-content-end">
                         <button type="button" class="btn btn-primary btn-success" ng-click="SaveSupport(sp)">Save </button>
-                        <button type="button" class="btn btn-primary btn-dark" ng-click="ResetForm();" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-dark" ng-click="ResetForm()" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
@@ -265,53 +265,214 @@
     </div>
 
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <div class="modal-header text-left" style="background-color:deepskyblue">
-                    <h4 class="modal-title w-100 font-weight-bold text-white">Edit Employee</h4>
+                <div class="modal-header text-left" style="background-color:rgb(153, 102, 255)">
+                    <h4 class="modal-title w-100 font-weight-bold text-white">Edit Application Detail</h4>
                 </div>
-                <form class="ng-pristine ng-valid-maxlength ng-invalid ng-invalid-required">
-                    <div class="modal-body mx-5 text-left">
-                        <div class="form-group">
-                            <label>En.<a class="text-danger">*</a></label>
-                            <input type="text" maxlength="10" ng-model="dataPerEmp.en" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" readonly="">
-                        </div>
-                        <div class="form-group">
-                            <label>Name<a class="text-danger">*</a></label>
-                            <input type="text" maxlength="50" ng-model="dataPerEmp.name" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Age<a class="text-danger">*</a></label>
-                            <input type="number" ng-model="dataPerEmp.age" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>DepartmentId<a class="text-danger">*</a></label>
-                            <input type="text" maxlength="3" ng-model="dataPerEmp.departmentId" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" required="">
+                <form class="ng-valid-maxlength ng-dirty ng-valid-parse ng-valid ng-valid-required ng-submitted">
+                    <div class="modal-body mx-3 text-left">
+                        <div class="card-body">
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="Emp">Emp</label>
+                                    <input type="text" class="form-control" ng-model="dataemp.emp_ID" ng-enter="GetEmployee(dataemp.emp_ID)" placeholder="Emp">
+                                </div>
+
+                                <div class="form-group col-md-5">
+                                    <label for="PriSup">Primary Support </label>
+                                    <input type="text" class="form-control" ng-model="dataemp.emp_Name" placeholder="Name">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="department">Department </label>
+                                    <input type="text" class="form-control" ng-model="dataemp.department" placeholder="Department">
+                                </div>
+
+                            </div>
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="Emp">Emp</label>
+                                    <input type="text" class="form-control" ng-model="dataempf.emp_ID" ng-enter="GetFocial(dataempf.emp_ID)" placeholder="Emp">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="Focial">Focial Point</label>
+                                    <input type="text" class="form-control" ng-model="dataempf.emp_Name" placeholder="Name">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="department">Department </label>
+                                    <input type="text" class="form-control" ng-model="dataempf.department" placeholder="Department">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>StartDate<a class="text-danger">*</a></label>
-                            <input type="text" ng-model="dataPerEmp.startDate" class="form-control ng-pristine ng-untouched ng-valid ng-empty" readonly="">
+                        <div class="card-body">
+                            <div class="form-row mb-2">
+                                <div class="form-group col-md-6">
+                                    <label for="Customer">App Owner</label>
+                                    <input type="text" class="form-control" ng-model="datacus.customer_Department" ng-value="datacus.customer_Department" ng-enter="GetCustomer(datacus.customer_Department)" placeholder="App Owner">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="keyUser">Key User</label>
+                                    <select class="form-control" ng-model="sp.datacuS" required>
+                                        <option ng-repeat="item in datacus" ng-value="item.customer_Name">{{item.customer_Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-6">
+                                    <label>OCIO Name </label>
+                                    <input type="text" class="form-control" ng-model="datainSup.ocio_name" placeholder="OCIO Name ">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="company">Company</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.company" placeholder="Company">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Business Unit</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.bu" placeholder="Business Unit">
+                                </div>
+
+                            </div>
+
                         </div>
 
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="">AppID</label>
+                                        <input type="text" class="form-control" ng-model="datainSup.app_id" placeholder="AppId">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="">Application Name</label>
+                                        <input type="text" class="form-control" ng-model="datainSup.app_name" placeholder="Application Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Function Description</label>
+                                <textarea class="form-control" ng-model="datainSup.func_des" rows="3"></textarea>
+                            </div>
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="ServerType">Server Type</label>
+                                    <select class="form-control" ng-model="datainSup.servertype" required>
+                                        <option ng-repeat="item in servertype" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Document Path</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.doc_path" placeholder="Document Path">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Application Objective</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.app_obj" placeholder="Application Objective">
+                                </div>
+                            </div>
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="">AppStatus Name</label>
+                                    <select class="form-control" ng-model="datainSup.Appstatusname" required>
+                                        <option ng-repeat="item in appstaname" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Application  URL</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.app_url" placeholder="Application  URL">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">SMTP</label>
+                                    <select class="form-control" ng-model="datainSup.smtp" required>
+                                        <option ng-repeat="item in smtp" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="software">Software Version</label>
+                                    <select class="form-control" ng-model="datainSup.softwareversion" required>
+                                        <option ng-repeat="item in softwareVer" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Source Path</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.source_path" placeholder="Source Path">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Database Name</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.db_name" placeholder="Database Name">
+                                </div>
+                            </div>
+
+                            <div class="form-row mb-3">
+                                <div class="form-group col-md-2">
+                                    <label for="">Application Status</label>
+                                    <select class="form-control" ng-model="datainSup.appstatus" required>
+                                        <option ng-repeat="item in appstatus" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Port</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.port" placeholder="Port">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="">Operating System</label>
+                                    <select class="form-control" ng-model="datainSup.os" required>
+                                        <option ng-repeat="item in ossystem" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row mb-2">
+                                <div class="form-group col-md-6">
+                                    <label for="">Project Manager</label>
+                                    <input type="text" class="form-control" ng-model="datainSup.projectmanag" placeholder="Project Manager">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Department</label>
+                                    <select class="form-control" ng-model="datainSup.department" required>
+                                        <option ng-repeat="item in department" ng-value="item.conf_Description">{{item.conf_Description}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" ng-model="datainSup.crit" ng-click="Work(crit)" id="" ng-true-value="'No'" ng-false-value="'Yes'">
+                                    <label>Criticality</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" ng-model="datainSup.source" ng-click="Work(source)" id="" ng-true-value="'No'" ng-false-value="'Yes'">
+                                    <label>Source Code</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" ng-model="datainSup.obsolet" ng-click="Work(obsolet)" id="" ng-true-value="'No'" ng-false-value="'Yes'">
+                                    <label>Obsolet</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Remark</label>
+                                <textarea class="form-control" ng-model="datainSup.remark" rows="3"></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-end">
-                        <button type="submit" class="btn btn-sm btn-success" ng-click="Update(dataPerEmp);">Save </button>
-                        <button class="btn btn-sm btn-dark" ng-click="ResetForm();" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-sm btn-success" ng-click="UpdateSupport(datainSup)">Save </button>
+                        <button class="btn btn-sm btn-dark" ng-click="ResetForm()" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-@section Scripts{
-<script src="~/js/app/controller/SupportController.js"></script>
-
-}
-
