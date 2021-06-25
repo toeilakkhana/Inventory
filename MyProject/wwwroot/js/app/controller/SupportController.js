@@ -134,6 +134,15 @@ myapp.controller('SupportController', function ($scope, $http) {
                 $scope.appowner = res.data;
             });
     }
+
+    $scope.GetDataSupport = function () {
+        $http.post(window.baseUrl + 'Application/GetDataSupport', {})
+            .then(function (res) {
+                console.log(res.data);
+                $scope.dataSup = res.data;
+            });
+    }
+
     $scope.SaveSupport = function (sp) {
         console.log(sp)
         var obj = {
@@ -158,7 +167,7 @@ myapp.controller('SupportController', function ($scope, $http) {
             ServerType: sp.servertype,
             Smtp: sp.smtp,
             SoftwareVer: sp.softwareversion,
-            Criticality:sp.crit,
+
         }
         console.log(obj)
         $http.post(window.baseUrl + 'Application/SaveSupport', JSON.stringify(obj))
@@ -203,19 +212,88 @@ myapp.controller('SupportController', function ($scope, $http) {
             });
     }
 
-    $scope.ResetForm = function (sp) {
-        //Even when you use form = {} it does not work
-        angular.copy({}, sp);
-    }
+    $scope.ResetForm = function () {
+        $('form')[0].reset();
+    };
     $scope.ShowModalAdd = function () {
         $('#modalAdd').modal('show');
     }
 
-    $scope.GetDataSupport = function () {
-        $http.post(window.baseUrl + 'Application/GetDataSupport', {})
+    $scope.DeleteDataSupport = function (id) {
+        Swal.fire({
+            title: 'Do you want to delete this Support Data?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then(function (result) {
+            if (result.value) {
+                $http.post(window.baseUrl + 'Application/DeleteDataSupport', JSON.stringify(id)).then(function (res) {
+                    if (res.data == true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success'
+                        })
+                    }
+                    $scope.GetDataSupport();
+                });
+            } else {
+                $scope.GetDataSupport();
+            }
+        })
+    }
+
+    $scope.UpdateSupport = function (datainSup) {
+
+
+        var obj = {
+            AppId: datainSup.app_id,
+            AppName: datainSup.app_name,
+            AppObj: datainSup.app_obj,
+            AppUrl: datainSup.app_url,
+            Company: datainSup.company,
+            DocPath: datainSup.doc_path,
+            FucDes: datainSup.func_des,
+            Remark: datainSup.remark,
+            Source_Path: datainSup.source_path,
+            Port: datainSup.port,
+            OcioName: datainSup.ocio_name,
+            ProjectManager: datainSup.projectmanag,
+            DatabaseName: datainSup.db_name,
+            Bu: datainSup.bu,
+            AppStatusName: datainSup.Appstatusname,
+            AppStatus: datainSup.appstatus,
+            Department: datainSup.department,
+            OsSystem: datainSup.os,
+            ServerType: datainSup.servertype,
+            Smtp: datainSup.smtp,
+            SoftwareVer: datainSup.softwareversion,
+        }
+        $http.post(window.baseUrl + 'Application/UpdateSupport', JSON.stringify(obj))
             .then(function (res) {
-                console.log(res.data);
-                $scope.dataSup = res.data;
+                if (res.data == true) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Save successfully'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Can Not Save'
+                    })
+                }
+                $scope.GetDataSupport();
+                $('#modalEdit').modal('hide');
+            });
+    }
+
+    $scope.ShowModalEdit = function (id) {
+        $('#modalEdit').modal('show');
+        $http.post(window.baseUrl + 'Application/ShowModalEdit', JSON.stringify(id))
+            .then(function (res) {
+                $scope.datainSup = res.data;
             });
     }
 });
