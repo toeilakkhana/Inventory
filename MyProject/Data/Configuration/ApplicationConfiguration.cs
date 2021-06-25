@@ -35,7 +35,7 @@ namespace MyProject.Data.Configuration
             builder.Property(e => e.Smtp).HasColumnName("Smtp");
             builder.Property(e => e.SoftwareVer).HasColumnName("SoftwareVer");
 
-           // builder.Property(e => e.Criticality).HasColumnName("Criticality");
+            builder.Property(e => e.Criticality).HasColumnName("Criticality");
         }
     }
 }

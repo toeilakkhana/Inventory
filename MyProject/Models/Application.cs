@@ -31,7 +31,7 @@ namespace MyProject.Models
         public string Smtp { get; set; }
         public string ServerType { get; set; }
         public string SoftwareVer { get; set; }
-        //public bool Criticality { get; set; }
+        public bool Criticality { get; set; }
 
 
 

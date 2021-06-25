@@ -166,7 +166,7 @@ namespace MyProject.Controllers
                     Smtp = obj.Smtp,
                     ServerType = obj.ServerType,
                     SoftwareVer = obj.SoftwareVer,
-                    //Criticality = obj.Criticality
+                    Criticality = obj.Criticality
                 };
                 _uow.ApplicationRepository.Insert(rs);
                 _uow.Commit();
@@ -179,84 +179,11 @@ namespace MyProject.Controllers
 
         }
 
-
         [HttpPost]
         public JsonResult GetDataSupport()
         {
-            var dataSup = _uow.ApplicationRepository.GetAll();
-            return Json(dataSup);
-        }
-
-        [HttpPost]
-        public JsonResult DeleteDataSupport([FromBody] string id)
-        {
-            if (id != null)
-            {
-                var supData = _uow.ApplicationRepository.GetAll().Where(w => w.AppId == id).FirstOrDefault();
-                _uow.ApplicationRepository.Delete(supData);
-                _uow.Commit();
-                return Json(true);
-            }
-            else
-            { 
-                return Json(false);
-            }
-
-        }
-
-
-        [HttpPost]
-        public JsonResult UpdateSupport([FromBody] Application obj)
-        {
-            if (obj != null)
-            {
-                var supData = new Application()
-                {
-                    AppId = obj.AppId,
-                    AppName = obj.AppName,
-                    AppObj = obj.AppObj,
-                    AppUrl = obj.AppUrl,
-                    Company = obj.Company,
-                    DocPath = obj.DocPath,
-                    FucDes = obj.FucDes,
-                    Remark = obj.Remark,
-                    Source_Path = obj.Source_Path,
-                    Port = obj.Port,
-                    OcioName = obj.OcioName,
-                    ProjectManager = obj.ProjectManager,
-                    DatabaseName = obj.DatabaseName,
-                    Bu = obj.Bu,
-                    AppStatusName = obj.AppStatusName,
-                    AppStatus = obj.AppStatus,
-                    Department = obj.Department,
-                    OsSystem = obj.OsSystem,
-                    Smtp = obj.Smtp,
-                    ServerType = obj.ServerType,
-                    SoftwareVer = obj.SoftwareVer
-                };
-                _uow.ApplicationRepository.Update(supData);
-                _uow.Commit();
-                return Json(true);
-            }
-            else
-            {
-                return Json(false);
-            }
-        }
-
-        [HttpPost]
-        public JsonResult ShowModalEdit([FromBody] string id)
-        {
-            if (id != null)
-            {
-                var empAll = _uow.ApplicationRepository.GetAll().Where(w => w.AppId == id).FirstOrDefault();
-                return Json(empAll);
-            }
-            else
-            {
-                return Json(false);
-            }
-
+            var empData = _uow.ApplicationRepository.GetAll();
+            return Json(empData);
         }
     }
 }
